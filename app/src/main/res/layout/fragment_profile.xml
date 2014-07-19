@@ -10,7 +10,7 @@
     tools:context=".MyActivity$PlaceholderFragment">
 
 
-    <ImageView
+    <simpleplay.midwesthack.com.simplesplitpay.utils.RoundedImageView
         android:id="@+id/profilePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

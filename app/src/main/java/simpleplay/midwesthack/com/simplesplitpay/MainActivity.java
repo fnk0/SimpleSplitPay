@@ -35,6 +35,7 @@ import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerItem;
 import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerListAdapter;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentLogin;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentProfile;
+import simpleplay.midwesthack.com.simplesplitpay.fragments.FriendsFragment;
 
 
 public class MainActivity extends FragmentActivity
@@ -45,12 +46,13 @@ public class MainActivity extends FragmentActivity
 
     public static final int FRAGMENT_LOGIN = 0;
     public static final int FRAGMENT_PROFILE = 1;
+    public static final int FRIENDS_FRAGMENT = 2;
 
     /**
      * Google Plus Sign-In Variables
      */
     private static final int RC_SIGN_IN = 0;
-    private static final int PROFILE_PIC_SIZE = 200;
+    private static final int PROFILE_PIC_SIZE = 300;
     public static final String PERSON_NAME = "personName";
     public static final String PERSON_PHOTO_URL = "personPhotoUrl";
     public static final String PERSON_GPLUS_PROFILE = "personG";
@@ -80,7 +82,7 @@ public class MainActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Thread.currentThread().setContextClassLoader(MainActivity.class.getClassLoader());
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -125,6 +127,7 @@ public class MainActivity extends FragmentActivity
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
+                .addScope(Plus.SCOPE_PLUS_PROFILE)
                 .build();
         if(mGoogleServices.isConnected()) {
             Log.i(LOG_TAG, "User is connected");
@@ -148,6 +151,9 @@ public class MainActivity extends FragmentActivity
                 break;
             case FRAGMENT_PROFILE:
                 activeFragment = new FragmentProfile();
+                break;
+            case FRIENDS_FRAGMENT:
+                activeFragment = new FriendsFragment();
                 break;
             default:
                 break;
@@ -277,7 +283,6 @@ public class MainActivity extends FragmentActivity
     }
 
     public void updateUI(boolean update) {
-        // TODO implement the change in the UI if the user sign in!
         if(update) {
             displayView(FRAGMENT_PROFILE, null);
         }
@@ -382,16 +387,18 @@ public class MainActivity extends FragmentActivity
         friendsList = new HashMap<String, String>();
         if(loadPeopleResult.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
             PersonBuffer personBuffer = loadPeopleResult.getPersonBuffer();
-
             try {
                 int count = personBuffer.getCount();
 
                 for (int i = 0; i < count; i++) {
                     friendsList.put(personBuffer.get(i).getDisplayName(), personBuffer.get(i).getImage().getUrl());
+                    //Log.i(LOG_TAG, "Display name: " + personBuffer.get(i).getDisplayName() + " --- Picture: " + personBuffer.get(i).getImage().getUrl());
                 }
             } finally {
                 personBuffer.close();
             }
+        } else {
+            Log.e(LOG_TAG, "Error requesting data..." + loadPeopleResult.getStatus());
         }
     }
 
