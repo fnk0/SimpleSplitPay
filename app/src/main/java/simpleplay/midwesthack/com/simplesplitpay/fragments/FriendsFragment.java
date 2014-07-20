@@ -17,6 +17,7 @@ import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
 import simpleplay.midwesthack.com.simplesplitpay.MainActivity;
 import simpleplay.midwesthack.com.simplesplitpay.R;
+import simpleplay.midwesthack.com.simplesplitpay.adapters.Friend;
 import simpleplay.midwesthack.com.simplesplitpay.cards.FriendCard;
 
 /**
@@ -38,6 +39,8 @@ public class FriendsFragment extends Fragment {
     private CardArrayAdapter mAdapter;
     private MainActivity mActivity;
     private HashMap<String, String> friendList;
+    private ArrayList<Friend> mFriendList;
+    private Bundle extras;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +48,10 @@ public class FriendsFragment extends Fragment {
 
         mActivity = (MainActivity) getActivity();
         friendList = mActivity.getFriends();
+
+        extras = getArguments();
+
+
 
         return rootView;
     }
@@ -56,16 +63,25 @@ public class FriendsFragment extends Fragment {
         mFriendsList = (CardListView) view.findViewById(R.id.friendList);
         mCardList = new ArrayList<Card>();
 
+        mFriendList = new ArrayList<Friend>();
+
         if(mActivity.getmGoogleServices().isConnected()) {
             Iterator it = friendList.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry entry = (Map.Entry) it.next();
                 FriendCard mCard = new FriendCard(getActivity());
-                mCard.setFriendName(entry.getKey().toString());
+                Friend mFriend = new Friend();
+                mFriend.setName(entry.getKey().toString());
+                mCard.setFriendName(mFriend.getName());
                 if(entry.getValue() != null) {
-                    //Log.i(LOG_TAG, entry.getValue().toString());
                     mCard.setFriendPicUrl(entry.getValue().toString());
                 }
+
+                if(extras != null) {
+                    mCard.setAddToBill(extras.getInt(FriendsFragment.ADD_FRIEND));
+                }
+
+                mFriendList.add(mFriend);
                 it.remove();
                 mCardList.add(mCard);
             }

@@ -14,6 +14,7 @@ public class Bill {
     public static final String BILL_VALUE = "value";
     public static final String BILL_DESCRIPTION = "description";
     public static final String BILL_ACTIVE = "isActive";
+
     private String billDescription;
     private String billDetails;
     private int billStatus;

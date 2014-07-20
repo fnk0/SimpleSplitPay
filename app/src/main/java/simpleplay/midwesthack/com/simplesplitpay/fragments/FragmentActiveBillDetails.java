@@ -19,7 +19,7 @@ import simpleplay.midwesthack.com.simplesplitpay.dataModel.Bill;
  * @version 1.0
  * @since 7/20/14.
  */
-public class FragmentActiveBillDetails extends Fragment {
+public class FragmentActiveBillDetails extends Fragment     {
 
     public FragmentActiveBillDetails() {
     }

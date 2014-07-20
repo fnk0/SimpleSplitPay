@@ -39,6 +39,7 @@ import java.util.List;
 
 import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerItem;
 import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerListAdapter;
+import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentActiveBillDetails;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentActiveBillsList;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentLogin;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentNewBill;
@@ -63,6 +64,7 @@ public class MainActivity extends FragmentActivity
 
     public static final int FRAGMENT_LOGIN = 9;
     public static final int FRAGMENT_REGISTER = 10;
+    public static final int FRAGMENT_ACTIVE_DETAILS = 11;
 
     /**
      * Google Plus Sign-In Variables
@@ -198,6 +200,9 @@ public class MainActivity extends FragmentActivity
                 break;
             case ACTIVE_BILLS_FRAG:
                 activeFragment = new FragmentActiveBillsList();
+                break;
+            case FRAGMENT_ACTIVE_DETAILS:
+                activeFragment = new FragmentActiveBillDetails();
                 break;
             default:
                 break;
