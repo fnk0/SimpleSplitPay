@@ -37,8 +37,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
     private EditText nameView, emailView, passwordView, confirmPasswordView;
     private Bundle extras;
-    private ProgressDialog pDialog;
 
+    private ProgressDialog pDialog;
     private String REQUEST_URL = "http://someurl:8000/simplepay/user/make/";
     public JSONParser jsonParser = new JSONParser();
 
