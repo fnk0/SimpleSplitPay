@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:weightSum="10"
+    android:layout_height="210dip">
+
+    <LinearLayout
+        android:layout_weight="8"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:paddingTop="20dip"
+        android:weightSum="10"
+        >
+        <simpleplay.midwesthack.com.simplesplitpay.utils.RoundedImageView
+
+            android:layout_marginLeft="10dip"
+            android:id="@+id/profilePicture"
+            android:layout_weight="4"
+            android:src="@drawable/logo"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            />
+
+        <TextView
+            android:id="@+id/userName"
+            android:text="Name Lastname"
+            android:layout_weight="6"
+            android:paddingLeft="10dip"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:paddingTop="20dip"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:weightSum="10"
+        android:paddingBottom="10dip"
+        >
+
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_weight="3"
+            android:text="Balance:"
+            android:layout_marginLeft="20dip"
+            android:gravity="center_vertical"
+            android:layout_width="0dip"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/balanceView"
+            android:layout_weight="7"
+            android:drawableLeft="@drawable/ic_dollar_small"
+            android:text="158.23"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dip"
+            android:layout_width="0dip"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

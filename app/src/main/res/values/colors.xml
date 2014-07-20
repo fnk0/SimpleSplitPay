@@ -8,6 +8,11 @@
     <color name="counter_text_bg">#626262</color>
     <color name="counter_text_color">#c5c4c4</color>
     <color name="card_background">#FFFFFF</color>
-    <color name="action_bar">#263238</color>
+    <color name="action_bar">#ff7043</color>
+
+    <color name="background_color">#e0e0e0</color>
+    <color name="button_background_down">#546e7a</color>
+    <color name="button_background">#ff7043</color>
+    <color name="text_description">#37474f</color>
 
 </resources>

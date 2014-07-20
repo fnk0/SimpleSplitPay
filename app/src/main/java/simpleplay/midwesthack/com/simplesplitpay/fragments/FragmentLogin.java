@@ -33,6 +33,7 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
     private LoginButton facebookLogin;
 
     public FragmentLogin() {
+
     }
 
     @Override
@@ -58,6 +59,7 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
                     Log.i(LOG_TAG, "Email: " + graphUser.asMap().get("email").toString());
                     extras.putString(MainActivity.PERSON_EMAIL, graphUser.asMap().get("email").toString());
                     extras.putString(MainActivity.PERSON_PHOTO_URL, profilePicture);
+                    Log.i(LOG_TAG, "Photo Url Size: " + profilePicture.length());
                     getFacebookFriends();
                     ((MainActivity) getActivity()).displayView(MainActivity.FRAGMENT_PROFILE, extras);
                 } else {

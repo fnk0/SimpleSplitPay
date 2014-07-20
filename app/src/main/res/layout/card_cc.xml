@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingBottom="5dip"
+    android:paddingTop="5dip"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="70dip">
+
+    <ImageView
+        android:id="@+id/ccImage"
+        android:src="@drawable/ic_cc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:text="------------"
+        android:inputType="textPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=" - "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/ccLast4"
+        android:textSize="19sp"
+        android:text="4810"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

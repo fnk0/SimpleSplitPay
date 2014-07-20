@@ -2,42 +2,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="12"
     tools:context=".MyActivity$PlaceholderFragment">
 
-
-    <simpleplay.midwesthack.com.simplesplitpay.utils.RoundedImageView
-        android:id="@+id/profilePicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
     <LinearLayout
-        android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/userName"
-            android:text="username"
+        <LinearLayout
+            android:id="@+id/cardsProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:textSize="20sp" />
+            android:orientation="vertical" />
 
-        <TextView
-            android:id="@+id/userEmail"
-            android:text="userEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:textSize="20sp" />
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_weight="0.8"
+                android:text="Add Credit Cards"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/addCreditCard"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:background="@drawable/ic_add_icon" />
+
+            <it.gmariotti.cardslib.library.view.CardListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button
@@ -45,6 +56,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/standard_button"
         android:text="@string/btn_logout"
-    />
+        android:textColor="@android:color/white" />
 </LinearLayout>

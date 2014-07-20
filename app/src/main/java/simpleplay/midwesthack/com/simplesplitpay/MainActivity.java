@@ -417,6 +417,7 @@ public class MainActivity extends FragmentActivity
                 userProfile.put(PERSON_GPLUS_PROFILE + "+", personGooglePlusProfile);
                 userProfile.put(PERSON_EMAIL, personEmail);
                 personPhotoUrl = personPhotoUrl.substring(0, personPhotoUrl.length() -2) + PROFILE_PIC_SIZE;
+                Log.i(LOG_TAG, "Photo URL Length: " + personPhotoUrl.length());
                 userProfile.put(PERSON_PHOTO_URL, personPhotoUrl);
 
                 //new LoadProfileImage(imageProfilePic).execute(personPhotoUrl);
@@ -433,12 +434,19 @@ public class MainActivity extends FragmentActivity
         friendsList = new HashMap<String, String>();
         if(loadPeopleResult.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
             PersonBuffer personBuffer = loadPeopleResult.getPersonBuffer();
+
             try {
                 int count = personBuffer.getCount();
 
                 for (int i = 0; i < count; i++) {
                     friendsList.put(personBuffer.get(i).getDisplayName(), personBuffer.get(i).getImage().getUrl());
                     //Log.i(LOG_TAG, "Display name: " + personBuffer.get(i).getDisplayName() + " --- Picture: " + personBuffer.get(i).getImage().getUrl());
+                    /*
+                    if(personBuffer.get(i).getImage().getUrl() != null) {
+                        Log.i(LOG_TAG, "Person URL Len: " + personBuffer.get(i).getImage().getUrl().length());
+                    }
+                    */
+
                 }
             } finally {
                 personBuffer.close();

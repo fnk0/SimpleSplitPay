@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:textColor="@color/text_description"
+        android:text="Credit Card Information"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:background="@color/action_bar"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="4dip"
+        android:layout_width="match_parent"
+        android:layout_height="1dip" />
+
+    <EditText
+        android:id="@+id/cc_num"
+        android:drawableLeft="@drawable/ic_cc"
+        android:hint="Credit Card Number"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="16"
+        />
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/cc_csv"
+            android:hint="CSV"
+            android:minEms="3"
+            android:maxLength="4"
+            android:inputType="number"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Expiration:"
+            android:textColor="@color/text_description"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="5dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/cc_mon"
+            android:hint="Month"
+            android:minEms="3"
+            android:maxLength="2"
+            android:inputType="number"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/cc_year"
+            android:hint="Year"
+            android:minEms="3"
+            android:maxLength="2"
+            android:inputType="number"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:textColor="@color/text_description"
+        android:text="Billing Information"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <View
+        android:background="@color/action_bar"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="4dip"
+        android:layout_width="match_parent"
+        android:layout_height="1dip" />
+
+    <EditText
+        android:id="@+id/addressLine1"
+        android:hint="Address Line 1"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        >
+        <EditText
+            android:id="@+id/addressLine2"
+            android:hint="Address Line 2"
+            android:inputType="text"
+            android:layout_width="wrap_content"
+            android:minEms="9"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            />
+
+        <EditText
+            android:id="@+id/zipCode"
+            android:hint="Zip Code"
+            android:minEms="6"
+            android:maxLength="5"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        >
+
+        <EditText
+            android:id="@+id/city"
+            android:hint="City"
+            android:minEms="10"
+            android:inputType="text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <EditText
+            android:id="@+id/state"
+            android:hint="State"
+            android:textAllCaps="true"
+            android:maxLength="2"
+            android:minEms="5"
+            android:inputType="text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/createCreditCard"
+        android:textColor="@android:color/white"
+        android:background="@drawable/standard_button"
+        android:text="Add Credit Card"
+        android:onClick="addCreditCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

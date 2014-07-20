@@ -18,7 +18,6 @@
         <item name="help">Help</item>
         <item name="about">About</item>
     </string-array>
-
     <string-array name="drawer_icons">
         <item name="icon_1">@drawable/ic_launcher</item>
         <item name="icon_2">@drawable/ic_launcher</item>
@@ -30,11 +29,10 @@
         <item name="icon_7">@drawable/ic_launcher</item>
     </string-array>
 
-
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
-
-
     <string name="btn_login"> g+ Login</string>
     <string name="btn_logout">Logout</string>
+    <string name="title_activity_create_cc">CreateCCActivity</string>
+
 </resources>
