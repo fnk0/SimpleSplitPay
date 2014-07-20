@@ -11,6 +11,9 @@ public class Bill {
 
     public static final int BILL_OK = 0;
     public static final int BILL_BAD = 1;
+    public static final String BILL_VALUE = "value";
+    public static final String BILL_DESCRIPTION = "description";
+    public static final String BILL_ACTIVE = "isActive";
     private String billDescription;
     private String billDetails;
     private int billStatus;

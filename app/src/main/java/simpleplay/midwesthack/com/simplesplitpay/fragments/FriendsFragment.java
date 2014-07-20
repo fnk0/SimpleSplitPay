@@ -29,6 +29,10 @@ import simpleplay.midwesthack.com.simplesplitpay.cards.FriendCard;
 public class FriendsFragment extends Fragment {
 
     private String LOG_TAG = "Friends Fragment";
+
+    public static final String ADD_FRIEND = "addFriend";
+    public static final int ADD_FRIEND_OK = 0;
+
     private List<Card> mCardList;
     private CardListView mFriendsList;
     private CardArrayAdapter mAdapter;

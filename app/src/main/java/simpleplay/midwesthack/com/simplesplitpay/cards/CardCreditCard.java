@@ -24,7 +24,7 @@ public class CardCreditCard extends Card {
     private String ccType, textLast4;
 
     public CardCreditCard(Context context) {
-        super(context, R.layout.card_cc);
+        this(context, R.layout.card_cc);
     }
 
     public CardCreditCard(Context context, int innerLayout) {
@@ -52,7 +52,7 @@ public class CardCreditCard extends Card {
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);
-        
+
         ccLast4 = (TextView) parent.findViewById(R.id.ccLast4);
         creditCardImage = (ImageView) parent.findViewById(R.id.ccImage);
 

@@ -39,6 +39,7 @@ import java.util.List;
 
 import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerItem;
 import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerListAdapter;
+import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentActiveBillsList;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentLogin;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentNewBill;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentProfile;
@@ -56,7 +57,7 @@ public class MainActivity extends FragmentActivity
     public static final int FRAGMENT_PROFILE = 0;
     public static final int FRIENDS_FRAGMENT = 1;
     public static final int NEWBILL_FRAGMENT = 2;
-    public static final int ACTIVE_FRAGMENT = 3;
+    public static final int ACTIVE_BILLS_FRAG = 3;
     public static final int TRASACTIONS_FRAGMENT = 4;
     public static final int ABOUT_FRAGMENT = 5;
 
@@ -194,6 +195,9 @@ public class MainActivity extends FragmentActivity
             case FRAGMENT_REGISTER:
                 activeFragment = new RegisterFragment();
                 displayToggle = false;
+                break;
+            case ACTIVE_BILLS_FRAG:
+                activeFragment = new FragmentActiveBillsList();
                 break;
             default:
                 break;
