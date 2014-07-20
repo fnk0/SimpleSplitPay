@@ -52,19 +52,21 @@ public class FriendsFragment extends Fragment {
         mFriendsList = (CardListView) view.findViewById(R.id.friendList);
         mCardList = new ArrayList<Card>();
 
-        Iterator it = friendList.entrySet().iterator();
-
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            FriendCard mCard = new FriendCard(getActivity());
-            mCard.setFriendName(entry.getKey().toString());
-            if(entry.getValue() != null) {
-                //Log.i(LOG_TAG, entry.getValue().toString());
-                mCard.setFriendPicUrl(entry.getValue().toString());
+        if(mActivity.getmGoogleServices().isConnected()) {
+            Iterator it = friendList.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry entry = (Map.Entry) it.next();
+                FriendCard mCard = new FriendCard(getActivity());
+                mCard.setFriendName(entry.getKey().toString());
+                if(entry.getValue() != null) {
+                    //Log.i(LOG_TAG, entry.getValue().toString());
+                    mCard.setFriendPicUrl(entry.getValue().toString());
+                }
+                it.remove();
+                mCardList.add(mCard);
             }
-            it.remove();
-            mCardList.add(mCard);
         }
+
         mAdapter = new CardArrayAdapter(getActivity(), mCardList);
         mFriendsList.setAdapter(mAdapter);
     }

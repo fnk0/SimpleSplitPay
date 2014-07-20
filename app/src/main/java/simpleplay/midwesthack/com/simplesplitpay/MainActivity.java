@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +18,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -29,7 +33,9 @@ import com.google.android.gms.plus.model.people.Person;
 import com.google.android.gms.plus.model.people.PersonBuffer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerItem;
 import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerListAdapter;
@@ -66,6 +72,13 @@ public class MainActivity extends FragmentActivity
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    /**
+     * Facebook Stuff
+     */
+    private UiLifecycleHelper mFacebookHelper;
+    private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
+
+
     // Nav Drawer and app Title
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -81,8 +94,11 @@ public class MainActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFacebookHelper = new UiLifecycleHelper(this, statusCallback);
+        mFacebookHelper.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
-        Thread.currentThread().setContextClassLoader(MainActivity.class.getClassLoader());
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -106,7 +122,7 @@ public class MainActivity extends FragmentActivity
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.action_bar)));
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_navigation_drawer, R.string.app_name, R.string.app_name) {
             public void onDrawerClosed(View view) {
@@ -135,7 +151,7 @@ public class MainActivity extends FragmentActivity
 
         if(savedInstanceState == null) {
             if(mGoogleServices.isConnected()) {
-                displayView(FRAGMENT_PROFILE, null);
+                updateUI(true);
             } else {
                 displayView(FRAGMENT_LOGIN, null);
             }
@@ -159,7 +175,14 @@ public class MainActivity extends FragmentActivity
                 break;
         }
 
+        //mFacebookHelper = new UiLifecycleHelper(this, status)
+
         if(activeFragment != null) {
+
+            if(fragBundle != null) {
+                activeFragment.setArguments(fragBundle);
+            }
+
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_container, activeFragment).commit();
             setTitle(navMenuTitles[position]);
@@ -175,6 +198,8 @@ public class MainActivity extends FragmentActivity
     @Override
     protected void onResume() {
         super.onResume();
+        mFacebookHelper.onResume();
+
     }
 
     @Override
@@ -247,6 +272,12 @@ public class MainActivity extends FragmentActivity
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        mFacebookHelper.onPause();
+    }
+
+    @Override
     public void onConnected(Bundle bundle) {
         mSignInClicked = false;
         Plus.PeopleApi.loadVisible(mGoogleServices, null).setResultCallback(this);
@@ -264,6 +295,7 @@ public class MainActivity extends FragmentActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mFacebookHelper.onDestroy();
     }
 
     @Override
@@ -284,7 +316,11 @@ public class MainActivity extends FragmentActivity
 
     public void updateUI(boolean update) {
         if(update) {
-            displayView(FRAGMENT_PROFILE, null);
+            Bundle extras = new Bundle();
+            extras.putString(MainActivity.PERSON_NAME, getProfileInformation().get(MainActivity.PERSON_NAME));
+            extras.putString(MainActivity.PERSON_EMAIL, getProfileInformation().get(MainActivity.PERSON_EMAIL));
+            extras.putString(MainActivity.PERSON_PHOTO_URL, getProfileInformation().get(MainActivity.PERSON_PHOTO_URL));
+            displayView(FRAGMENT_PROFILE, extras);
         }
     }
 
@@ -335,6 +371,12 @@ public class MainActivity extends FragmentActivity
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mFacebookHelper.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == RC_SIGN_IN) {
             if(resultCode != RESULT_OK) {
@@ -347,9 +389,13 @@ public class MainActivity extends FragmentActivity
                 mGoogleServices.connect();
             }
         }
+
+        mFacebookHelper.onActivityResult(requestCode, resultCode, data);
     }
 
-
+    public GoogleApiClient getmGoogleServices() {
+        return mGoogleServices;
+    }
 
     public HashMap<String, String> getProfileInformation() {
         HashMap<String, String> userProfile = new HashMap<String, String>();
@@ -412,6 +458,18 @@ public class MainActivity extends FragmentActivity
             displayView(position, null);
         }
     }
+
+    public Session.StatusCallback statusCallback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState sessionState, Exception e) {
+            if (sessionState.isOpened()) {
+                Log.i(LOG_TAG, "Facebook Logged in!");
+            } else {
+                Log.i(LOG_TAG, "Facebook Logged Out!");
+                displayView(FRAGMENT_LOGIN, null);
+            }
+         }
+    };
 
 
 }

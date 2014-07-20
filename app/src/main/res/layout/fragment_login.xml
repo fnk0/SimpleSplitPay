@@ -2,14 +2,59 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:padding="20dip"
+    android:weightSum="10"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_weight="10"
+        android:id="@+id/logo"
+        android:src="@drawable/logo"
+        android:layout_width="match_parent"
+        android:layout_height="0dip" />
+
+    <EditText
+        android:id="@+id/username"
+        android:hint="Username"
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        />
+
+    <EditText
+        android:id="@+id/password"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dip"  />
+        android:layout_marginBottom="@dimen/activity_vertical_margin"  />
+
+    <com.facebook.widget.LoginButton
+        android:id="@+id/facebook_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        facebook:confirm_logout="false"
+        facebook:fetch_user_info="true"
+    />
+
+    <Button
+        android:id="@+id/register"
+        android:text="Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        />
 
 </LinearLayout>

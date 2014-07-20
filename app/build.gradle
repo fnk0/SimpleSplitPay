@@ -27,5 +27,7 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:library-extra:1.6.0'
     compile 'com.google.android.gms:play-services:5.0.+'
     compile 'com.squareup.picasso:picasso:2.3.2'
-
+    compile 'fr.avianey:facebook-android-api:+@aar'
 }
+
+

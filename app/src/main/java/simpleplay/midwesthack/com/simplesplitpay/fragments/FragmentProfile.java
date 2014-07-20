@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.Session;
+import com.squareup.picasso.Picasso;
+
 import java.util.HashMap;
 
 import simpleplay.midwesthack.com.simplesplitpay.MainActivity;
 import simpleplay.midwesthack.com.simplesplitpay.R;
-import simpleplay.midwesthack.com.simplesplitpay.async.LoadProfileImage;
 
 /**
  * Created by <a href="mailto:marcusandreog@gmail.com">Marcus Gabilheri</a>
@@ -24,8 +26,9 @@ import simpleplay.midwesthack.com.simplesplitpay.async.LoadProfileImage;
  */
 public class FragmentProfile extends Fragment implements View.OnClickListener {
 
+    private static final String LOG_TAG = "Fragment Profile";
     private HashMap<String, String> userInfo;
-    private Button btnSignOut, btnRevokeAccess;
+    private Button btnSignOut;
     private ImageView imageProfilePic;
     private TextView txtName, txtEmail;
     private MainActivity mActivity;
@@ -37,23 +40,20 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        Bundle extras = getArguments();
         mActivity = (MainActivity) getActivity();
-        userInfo = mActivity.getProfileInformation();
-
         btnSignOut = (Button) rootView.findViewById(R.id.btn_sign_out);
-        btnRevokeAccess = (Button) rootView.findViewById(R.id.btn_revoke_access);
         imageProfilePic = (ImageView) rootView.findViewById(R.id.profilePicture);
         txtName = (TextView) rootView.findViewById(R.id.userName);
         txtEmail = (TextView) rootView.findViewById(R.id.userEmail);
 
-        LoadProfileImage loadProfileImage = new LoadProfileImage(imageProfilePic);
-        loadProfileImage.execute(userInfo.get(MainActivity.PERSON_PHOTO_URL));
-
-        txtName.setText(userInfo.get(MainActivity.PERSON_NAME));
-        txtEmail.setText(userInfo.get(MainActivity.PERSON_EMAIL));
+        if(extras != null) {
+            Picasso.with(getActivity()).load(extras.getString(MainActivity.PERSON_PHOTO_URL)).into(imageProfilePic);
+            txtName.setText(extras.getString(MainActivity.PERSON_NAME));
+            txtEmail.setText(extras.getString(MainActivity.PERSON_EMAIL));
+        }
 
         btnSignOut.setOnClickListener(this);
-        btnRevokeAccess.setOnClickListener(this);
 
         return rootView;
     }
@@ -62,13 +62,14 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_sign_out:
-                mActivity.signOutFromGplus();
-                mActivity.displayView(MainActivity.FRAGMENT_LOGIN, null);
-                break;
-            case R.id.btn_revoke_access:
-                mActivity.revokeGplusAccess();
+                if(mActivity.getmGoogleServices().isConnected()) {
+                    mActivity.signOutFromGplus();
+                } else {
+                    Session.getActiveSession().closeAndClearTokenInformation();
+                }
                 mActivity.displayView(MainActivity.FRAGMENT_LOGIN, null);
                 break;
         }
     }
+
 }

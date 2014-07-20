@@ -63,6 +63,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="library-1.6.0" level="project" />
     <orderEntry type="library" exported="" name="library-1.0.4" level="project" />
+    <orderEntry type="library" exported="" name="facebook-android-api-3.15.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-19.1.0" level="project" />
     <orderEntry type="library" exported="" name="library-2.6.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-19.1.0" level="project" />

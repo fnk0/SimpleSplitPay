@@ -5,6 +5,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Facebook app id -->
+    <string name="app_id">1477144792530206</string>
+
     <string-array name="drawer_items">
         <item name="login">Login</item>
         <item name="profile">Profile</item>
@@ -33,7 +36,5 @@
 
 
     <string name="btn_login"> g+ Login</string>
-    <string name="btn_logout">g+ Logout</string>
-    <string name="btn_revoke">g+ Revoke Access</string>
-
+    <string name="btn_logout">Logout</string>
 </resources>
