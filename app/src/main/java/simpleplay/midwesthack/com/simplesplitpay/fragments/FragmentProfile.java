@@ -11,10 +11,17 @@ import android.widget.LinearLayout;
 
 import com.facebook.Session;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
+import it.gmariotti.cardslib.library.view.CardListView;
 import it.gmariotti.cardslib.library.view.CardView;
 import simpleplay.midwesthack.com.simplesplitpay.CreateCCActivity;
 import simpleplay.midwesthack.com.simplesplitpay.MainActivity;
 import simpleplay.midwesthack.com.simplesplitpay.R;
+import simpleplay.midwesthack.com.simplesplitpay.cards.CardCreditCard;
 import simpleplay.midwesthack.com.simplesplitpay.cards.ProfileCard;
 import simpleplay.midwesthack.com.simplesplitpay.dataModel.CreditCard;
 
@@ -32,6 +39,8 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     private MainActivity mActivity;
     private LinearLayout cardsLayout;
     private ProfileCard mProfile;
+    private CardListView creditCardListView;
+    private ArrayList<CreditCard> mCreditCardList;
 
     public FragmentProfile() {
     }
@@ -58,6 +67,24 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
         mCardView.setCard(mProfile);
 
         cardsLayout.addView(mCardView);
+
+        creditCardListView = (CardListView) rootView.findViewById(R.id.creditCardList);
+
+        mCreditCardList = new ArrayList<CreditCard>();
+        mCreditCardList.add(new CreditCard(CreditCard.VISA, "4879471200018945"));
+        mCreditCardList.add(new CreditCard(CreditCard.MASTER, "5579471200014791"));
+
+        List<Card> mCards = new ArrayList<Card>();
+
+        for(CreditCard cc : mCreditCardList) {
+            CardCreditCard mCard = new CardCreditCard(getActivity());
+            String ccNum = cc.getCreditCardNumber();
+            mCard.setCcType(cc.getCreditCardType()).setTextLast4(ccNum.substring(ccNum.length() - 4, ccNum.length()));
+            mCards.add(mCard);
+        }
+
+        CardArrayAdapter mAdapter = new CardArrayAdapter(getActivity(), mCards);
+        creditCardListView.setAdapter(mAdapter);
 
         btnSignOut.setOnClickListener(this);
         addCC.setOnClickListener(this);

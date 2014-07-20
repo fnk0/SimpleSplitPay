@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.Request;
@@ -31,6 +32,7 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
 
     private String LOG_TAG = "Fragment Login";
     private LoginButton facebookLogin;
+    private Button registerButton;
 
     public FragmentLogin() {
 
@@ -45,6 +47,9 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
 
         permissions.add("email");
         permissions.add("user_friends");
+
+        registerButton = (Button) rootView.findViewById(R.id.register);
+        registerButton.setOnClickListener(this);
 
         facebookLogin = (LoginButton) rootView.findViewById(R.id.facebook_login);
         facebookLogin.setReadPermissions(permissions);
@@ -104,7 +109,7 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
                 ((MainActivity) getActivity()).signInWithGlLus();
                 break;
             case R.id.register:
-
+                ((MainActivity)getActivity()).displayView(MainActivity.FRAGMENT_REGISTER, null);
                 break;
         }
 

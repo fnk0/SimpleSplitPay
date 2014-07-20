@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:layout_width="match_parent"
-    android:layout_height="70dip">
+    android:layout_height="50dip">
 
     <ImageView
         android:id="@+id/ccImage"
@@ -32,7 +32,8 @@
 
     <TextView
         android:id="@+id/ccLast4"
-        android:textSize="19sp"
+        android:textSize="16sp"
+        android:textColor="@color/text_description"
         android:text="4810"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

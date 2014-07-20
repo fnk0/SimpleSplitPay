@@ -9,13 +9,11 @@
     <string name="app_id">1477144792530206</string>
 
     <string-array name="drawer_items">
-        <item name="login">Login</item>
         <item name="profile">Profile</item>
         <item name="friends">Friends</item>
         <item name="new_bill">New Bill</item>
+        <item name="active_bills">Active Bills</item>
         <item name="transactions">Transactions</item>
-        <item name="settings">Settings</item>
-        <item name="help">Help</item>
         <item name="about">About</item>
     </string-array>
     <string-array name="drawer_icons">
@@ -25,8 +23,6 @@
         <item name="icon_4">@drawable/ic_launcher</item>
         <item name="icon_5">@drawable/ic_launcher</item>
         <item name="icon_6">@drawable/ic_launcher</item>
-        <item name="icon_7">@drawable/ic_launcher</item>
-        <item name="icon_7">@drawable/ic_launcher</item>
     </string-array>
 
     <!-- Content Description -->

@@ -12,6 +12,12 @@ public class CreditCard {
     public static final int CREATE_CREDIT_CARD_CODE = 0;
     public static final int CARD_CREATED_SUCCESSFULL = 200;
     public static final int CARD_NOT_CREATED = 404;
+
+    public static final String VISA = "visa";
+    public static final String MASTER = "master";
+    public static final String AMEX = "amex";
+    public static final String DISCOVER = "discover";
+
     private String creditCardNumber;
     private String creditCardCSV;
     private String creditCardExpMonth;
@@ -22,6 +28,11 @@ public class CreditCard {
 
 
     public CreditCard() {
+    }
+
+    public CreditCard(String creditCardType, String creditCardNumber) {
+        this.creditCardType = creditCardType;
+        this.creditCardNumber = creditCardNumber;
     }
 
     public String getCreditCardNumber() {

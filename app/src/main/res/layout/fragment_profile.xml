@@ -12,6 +12,7 @@
     tools:context=".MyActivity$PlaceholderFragment">
 
     <LinearLayout
+        android:layout_weight="12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -37,6 +38,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_weight="0.8"
                 android:text="Add Credit Cards"
+                android:layout_marginLeft="20dip"
                 android:textSize="20sp" />
 
             <Button
@@ -44,11 +46,11 @@
                 android:layout_width="60dip"
                 android:layout_height="60dip"
                 android:background="@drawable/ic_add_icon" />
-
-            <it.gmariotti.cardslib.library.view.CardListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
+        <it.gmariotti.cardslib.library.view.CardListView
+            android:id="@+id/creditCardList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <Button

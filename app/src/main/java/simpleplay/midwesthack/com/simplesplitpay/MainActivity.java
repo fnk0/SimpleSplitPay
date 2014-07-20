@@ -40,8 +40,11 @@ import java.util.List;
 import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerItem;
 import simpleplay.midwesthack.com.simplesplitpay.adapters.NavDrawerListAdapter;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentLogin;
+import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentNewBill;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentProfile;
+import simpleplay.midwesthack.com.simplesplitpay.fragments.FragmentTransactions;
 import simpleplay.midwesthack.com.simplesplitpay.fragments.FriendsFragment;
+import simpleplay.midwesthack.com.simplesplitpay.fragments.RegisterFragment;
 
 
 public class MainActivity extends FragmentActivity
@@ -50,9 +53,15 @@ public class MainActivity extends FragmentActivity
 
     public static final String LOG_TAG = "MAIN ACTIVITY";
 
-    public static final int FRAGMENT_LOGIN = 0;
-    public static final int FRAGMENT_PROFILE = 1;
-    public static final int FRIENDS_FRAGMENT = 2;
+    public static final int FRAGMENT_PROFILE = 0;
+    public static final int FRIENDS_FRAGMENT = 1;
+    public static final int NEWBILL_FRAGMENT = 2;
+    public static final int ACTIVE_FRAGMENT = 3;
+    public static final int TRASACTIONS_FRAGMENT = 4;
+    public static final int ABOUT_FRAGMENT = 5;
+
+    public static final int FRAGMENT_LOGIN = 9;
+    public static final int FRAGMENT_REGISTER = 10;
 
     /**
      * Google Plus Sign-In Variables
@@ -121,7 +130,6 @@ public class MainActivity extends FragmentActivity
         mDrawerList.setAdapter(mNavAdapter);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.action_bar)));
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_navigation_drawer, R.string.app_name, R.string.app_name) {
@@ -160,22 +168,46 @@ public class MainActivity extends FragmentActivity
 
     public void displayView(int position, Bundle fragBundle) {
         activeFragment = null;
+        boolean displayToggle = true;
 
         switch (position) {
             case FRAGMENT_LOGIN:
                 activeFragment = new FragmentLogin();
+                displayToggle = false;
                 break;
             case FRAGMENT_PROFILE:
+                fragBundle = new Bundle();
+                fragBundle.putString(MainActivity.PERSON_NAME, getProfileInformation().get(MainActivity.PERSON_NAME));
+                fragBundle.putString(MainActivity.PERSON_EMAIL, getProfileInformation().get(MainActivity.PERSON_EMAIL));
+                fragBundle.putString(MainActivity.PERSON_PHOTO_URL, getProfileInformation().get(MainActivity.PERSON_PHOTO_URL));
                 activeFragment = new FragmentProfile();
                 break;
             case FRIENDS_FRAGMENT:
                 activeFragment = new FriendsFragment();
                 break;
+            case NEWBILL_FRAGMENT:
+                activeFragment = new FragmentNewBill();
+                break;
+            case TRASACTIONS_FRAGMENT:
+                activeFragment = new FragmentTransactions();
+                break;
+            case FRAGMENT_REGISTER:
+                activeFragment = new RegisterFragment();
+                displayToggle = false;
+                break;
             default:
                 break;
         }
 
-        //mFacebookHelper = new UiLifecycleHelper(this, status)
+        if(displayToggle) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+            mDrawerToggle.setDrawerIndicatorEnabled(true);
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        } else {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            mDrawerToggle.setDrawerIndicatorEnabled(false);
+            getActionBar().setDisplayHomeAsUpEnabled(false);
+        }
 
         if(activeFragment != null) {
 
@@ -185,9 +217,17 @@ public class MainActivity extends FragmentActivity
 
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_container, activeFragment).commit();
-            setTitle(navMenuTitles[position]);
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);
+
+            if(position == FRAGMENT_REGISTER) {
+                setTitle("Register");
+            } else if(position == FRAGMENT_LOGIN) {
+                setTitle("Login");
+            } else {
+                setTitle(navMenuTitles[position]);
+            }
+
         } else {
             Log.e(LOG_TAG, "Error creating fragment!");
         }
@@ -240,8 +280,7 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_settings).setVisible(false);
         return super.onPrepareOptionsMenu(menu);
     }
 

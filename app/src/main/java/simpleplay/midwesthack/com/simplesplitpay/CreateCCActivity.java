@@ -19,10 +19,6 @@ public class CreateCCActivity extends Activity {
     public static final String UNDEFINED = "undefined";
     private EditText ccNumber, ccCSV, ccMon, ccYear, billingLine1, billingLine2, billingZipCode, billingCity, billingState;
     private String creditCardType;
-    private static final String VISA = "visa";
-    private static final String MASTER = "master";
-    private static final String AMEX = "amex";
-    private static final String DISCOVER = "discover";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,20 +51,20 @@ public class CreateCCActivity extends Activity {
                 String text = s.toString();
                 if(text.startsWith("4")) {
                     ccNumber.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_visa), null, null, null);
-                    creditCardType = VISA;
+                    creditCardType = CreditCard.VISA;
                 } else if(text.isEmpty()) {
                     ccNumber.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_cc), null, null, null);
                     creditCardType = UNDEFINED;
                 } else if(text.startsWith("6")) {
                     ccNumber.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_discover), null, null, null);
-                    creditCardType = DISCOVER;
+                    creditCardType = CreditCard.DISCOVER;
                 } else if(text.startsWith("5")) {
                     ccNumber.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_mastercard), null, null, null);
-                    creditCardType = MASTER;
+                    creditCardType = CreditCard.MASTER;
                 } else if(text.length() > 1) {
                     if(text.substring(0, 2).equals("34") || text.substring(0, 2).equals("37")) {
                         ccNumber.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_amex), null, null, null);
-                        creditCardType = AMEX;
+                        creditCardType = CreditCard.AMEX;
                     }
                 }
             }
